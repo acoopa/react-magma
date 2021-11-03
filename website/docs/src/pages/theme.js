@@ -604,8 +604,9 @@ export function Example() {
               }}
               containerStyle={{ height: '100vh', width: '400px' }}
               onSubmit={values => {
-                setTheme(JSON.stringify(values))
-                setActiveIndex(0)
+                setTheme(JSON.stringify(values));
+                setActiveIndex(0);
+                window.location.reload();
               }}
             />
           </TabPanel>

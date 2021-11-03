@@ -1,5 +1,3 @@
-import { cssVar, darken, lighten, tint } from 'polished';
-
 const DEFAULT_STYLE_PROPS = {
   color: 'primary',
   shape: 'fill',
@@ -133,7 +131,6 @@ export function buildBorderColor(props) {
 
 export function buildColor(props) {
   props = buildPropsWithDefaultButtonStyles(props);
-  console.log('primary', cssVar('--colors-primary'))
 
   if (props.disabled && props.isInverse && props.variant !== 'solid') {
     return 'var(--colors-disabledInverseText)';
@@ -169,7 +166,7 @@ export function buildFocusBackground(props) {
   props = buildPropsWithDefaultButtonStyles(props);
 
   if (props.color === 'marketing') {
-    return lighten(0.1, cssVar('--colors-pop04', '#bada55') as string);
+    return '--colors-pop04-eh';
   }
   if (
     (props.variant !== 'solid' && !props.isInverse) ||
@@ -177,13 +174,13 @@ export function buildFocusBackground(props) {
     ) {
       switch (props.color) {
       case 'secondary':
-        return tint(0.9, cssVar('--colors-neutral', '#bada55') as string);
+        return '--colors-neutral-alt-eh'
       case 'success':
-        return tint(0.9, cssVar('--colors-success', '#bada55') as string);
+        return '--colors-success-alt-eh'
       case 'danger':
-        return tint(0.9, cssVar('--colors-danger', '#bada55') as string);
+        return '--colors-danger-alt-eh'
       default:
-        return tint(0.9, cssVar('--colors-primary', '#bada55') as string);
+        return '--colors-primary-alt-eh'
     }
   }
   if (props.variant !== 'solid' && props.isInverse) {
@@ -191,13 +188,13 @@ export function buildFocusBackground(props) {
   }
   switch (props.color) {
     case 'secondary':
-      return darken(0.1, cssVar('--colors-neutral08', '#bada55') as string);
+      return '--colors-neutral08-alt-eh'
     case 'success':
-      return darken(0.1, cssVar('--colors-success', '#bada55') as string);
+      return '--colors-success-alt-eh'
     case 'danger':
-      return darken(0.1, cssVar('--colors-danger', '#bada55') as string);
+      return '--colors-danger-alt-eh'
     default:
-      return darken(0.1, cssVar('--colors-primary', '#bada55') as string);
+      return '--colors-primary-alt-eh'
   }
 }
 
@@ -214,11 +211,11 @@ export function buildFocusColor(props) {
       case 'secondary':
         return 'var(--colors-neutral)';
       case 'success':
-        return darken(0.1, cssVar('--colors-success', '#bada55') as string);
+        return '--colors-success-alt-eh'
       case 'danger':
-        return darken(0.1, cssVar('--colors-danger', '#bada55') as string);
+        return '--colors-danger-alt-eh'
       default:
-        return darken(0.1, cssVar('--colors-primary', '#bada55') as string);
+        return '--colors-primary-alt-eh'
     }
   }
   if (props.variant !== 'solid' && props.isInverse) {
@@ -262,7 +259,7 @@ export function buildActiveBackground(props) {
   props = buildPropsWithDefaultButtonStyles(props);
 
   if (props.color === 'marketing') {
-    return lighten(0.2, cssVar('--colors-pop04', '#bada55') as string);
+    return '--colors-pop04-alt-bee'
   }
   if (
     (props.variant !== 'solid' && !props.isInverse) ||
@@ -270,13 +267,13 @@ export function buildActiveBackground(props) {
   ) {
     switch (props.color) {
       case 'secondary':
-        return tint(0.7, cssVar('--colors-neutral', '#bada55') as string);
+        return '--colors-neutral-alt-bee'
       case 'success':
-        return tint(0.7, cssVar('--colors-success', '#bada55') as string);
+        return '--colors-success-alt-bee'
       case 'danger':
-        return tint(0.7, cssVar('--colors-danger', '#bada55') as string);
+        return '--colors-danger-alt-bee'
       default:
-        return tint(0.7, cssVar('--colors-primary', '#bada55') as string);
+        return '--colors-primary-alt-bee'
     }
   }
   if (props.variant !== 'solid' && props.isInverse) {
@@ -284,13 +281,13 @@ export function buildActiveBackground(props) {
   }
   switch (props.color) {
     case 'secondary':
-      return darken(0.2, cssVar('--colors-neutral08', '#bada55') as string);
+      return '--colors-neutral08-alt-bee'
     case 'success':
-      return darken(0.2, cssVar('--colors-success', '#bada55') as string);
+      return '--colors-success-alt-bee'
     case 'danger':
-      return darken(0.2, cssVar('--colors-danger', '#bada55') as string);
+      return '--colors-danger-alt-bee'
     default:
-      return darken(0.2, cssVar('--colors-primary', '#bada55') as string);
+      return '--colors-primary-alt-bee'
   }
 }
 
@@ -308,11 +305,11 @@ export function buildActiveColor(props) {
       case 'secondary':
         return 'var(--colors-neutral)';
       case 'success':
-        return darken(0.2, cssVar('--colors-success', '#bada55') as string);
+        return '--colors-success-alt-bee'
       case 'danger':
-        return darken(0.2, cssVar('--colors-danger', '#bada55') as string);
+        return '--colors-danger-alt-bee'
       default:
-        return darken(0.2, cssVar('--colors-primary', '#bada55') as string);
+        return '--colors-primary-alt-bee'
     }
   }
   if (props.variant !== 'solid' && props.isInverse) {

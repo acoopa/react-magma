@@ -4,6 +4,7 @@ import { ThemeContext } from '../../theme/ThemeContext';
 import { Hyperlink } from '../Hyperlink';
 import { useIsInverse } from '../../inverse';
 import { ChevronRightIcon } from 'react-magma-icons';
+import { useThemeStyling } from '@react-magma/themes';
 
 /**
  * @children required
@@ -17,22 +18,22 @@ export interface BreadcrumbItemProps
   to?: string;
 }
 
-const StyledItem = styled.li`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
+const StyledBreadcrumbItem = styled.li`
+  ${() =>
+    useThemeStyling({
+      props: {},
+      style: {},
+      componentName: 'Breadcrumb.BreadcrumbItem',
+    }) as any}
 `;
 
 const StyledSpan = styled.span<{ isInverse?: boolean }>`
-  color: ${props =>
-    props.isInverse
-      ? props.theme.colors.neutral08
-      : props.theme.colors.neutral03};
-
-  svg {
-    margin: 0 ${props => props.theme.spaceScale.spacing02};
-  }
+  ${(props: { isInverse?: boolean }) =>
+    useThemeStyling<{ isInverse?: boolean }>({
+      props,
+      style: {},
+      componentName: 'Breadcrumb.StyledSpan',
+    }) as any}
 `;
 
 export const BreadcrumbItem = React.forwardRef<
@@ -44,7 +45,7 @@ export const BreadcrumbItem = React.forwardRef<
   const isInverse = useIsInverse();
 
   return (
-    <StyledItem {...other} data-testid={testId} ref={ref}>
+    <StyledBreadcrumbItem {...other} data-testid={testId} ref={ref}>
       {to ? (
         <>
           <Hyperlink to={to} isInverse={isInverse}>
@@ -59,6 +60,6 @@ export const BreadcrumbItem = React.forwardRef<
           {children}
         </StyledSpan>
       )}
-    </StyledItem>
+    </StyledBreadcrumbItem>
   );
 });

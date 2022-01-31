@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { ThemeContext } from '../../theme/ThemeContext';
 import { I18nContext } from '../../i18n';
 import { InverseContext, useIsInverse } from '../../inverse';
+import { useThemeStyling } from '@react-magma/themes';
 
 /**
  * @children required
@@ -13,18 +14,23 @@ export interface BreadcrumbProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const StyledList = styled.ol<BreadcrumbProps>`
-  display: flex;
-  flex-wrap: wrap;
-  font-size: ${props => props.theme.typeScale.size02.fontSize};
-  line-height: ${props => props.theme.typeScale.size02.lineHeight};
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  ${(props: BreadcrumbProps) =>
+    useThemeStyling<BreadcrumbProps>({
+      props,
+      style: props.style,
+      componentName: 'Breadcrumb',
+    }) as any}
 `;
 
 export const Breadcrumb = React.forwardRef<HTMLOListElement, BreadcrumbProps>(
   (props, ref) => {
-    const { 'aria-label': ariaLabel, children, isInverse: isInverseProp, testId, ...other } = props;
+    const {
+      'aria-label': ariaLabel,
+      children,
+      isInverse: isInverseProp,
+      testId,
+      ...other
+    } = props;
 
     const theme = React.useContext(ThemeContext);
     const i18n = React.useContext(I18nContext);

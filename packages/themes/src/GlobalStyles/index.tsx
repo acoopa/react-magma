@@ -1,14 +1,17 @@
 import { Global, css } from '@emotion/react';
 
-import { ThemeContext } from '../ThemeContext';
 import { ThemeInterface } from '../ThemeInterface';
 import { useIsInverse } from '../inverse';
-import {v3} from '../magma';
+import { magmav3 as v3 } from '../magma';
 import { mergeThemes } from '../utils';
 
 import { convertThemeToCssVariables } from '../utils';
 
-function getStyles(theme: any, isInverse: boolean, vars: Record<string, string>) {
+export interface GlobalThemeProps {
+  theme: ThemeInterface;
+}
+
+function getStyles(isInverse: boolean, vars: Record<string, string>) {
   return css`
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
@@ -25,44 +28,44 @@ function getStyles(theme: any, isInverse: boolean, vars: Record<string, string>)
 
     *:focus {
       outline: 2px dotted
-        ${isInverse ? theme.colors.focusInverse : theme.colors.focus};
+        ${isInverse ? 'var(--colors-focusInverse)' : 'var(--colors-focus)'};
       outline-offset: 4px;
     }
 
     html {
       -ms-text-size-adjust: 100%;
       -webkit-text-size-adjust: 100%;
-      font-size: ${theme.typeScale.size03.fontSize};
-      line-height: ${theme.typeScale.size03.lineHeight};
+      font-size: var(--typeScale-size03-fontSize);
+      line-height: var(--typeScale-size03-lineHeight);
       scroll-behavior: smooth;
     }
 
     html,
     body {
       background: ${isInverse
-        ? theme.colors.foundation
-        : theme.colors.neutral08};
-      color: ${isInverse ? theme.colors.neutral08 : theme.colors.neutral};
+        ? 'var(--colors-foundation)'
+        : 'var(--colors-neutral08)'};
+      color: ${isInverse ? 'var(--colors-neutral08)' : 'var(--colors-neutral)'};
       margin: 0;
       padding: 0;
     }
 
     body {
-      font-family: ${theme.bodyFont};
+      font-family: var(--bodyFont);
       font-style: normal;
       font-weight: 400;
-      font-size: ${theme.typeScale.size03.fontSize};
-      line-height: ${theme.typeScale.size03.lineHeight};
+      font-size: var(--typeScale-size03-fontSize);
+      line-height: var(--typeScale-size03-lineHeight);
     }
 
     a {
-      color: ${isInverse ? theme.colors.neutral07 : theme.colors.primary};
+      color: ${isInverse ? 'var(--colors-neutral07)' : 'var(--colors-primary)'};
       cursor: pointer;
       text-decoration: underline;
 
       &:hover,
       &:focus {
-        color: ${isInverse ? theme.colors.neutral06 : theme.colors.focus};
+        color: ${isInverse ? 'var(--colors-neutral06)' : 'var(--colors-focus)'};
       }
     }
 
@@ -81,12 +84,9 @@ function getStyles(theme: any, isInverse: boolean, vars: Record<string, string>)
   `;
 }
 
-export const GlobalStyles= ({theme}:{theme:ThemeInterface}) => {
-  const isInverse = useIsInverse() ||  false;
+export const GlobalStyles = ({ theme }: GlobalThemeProps) => {
+  const isInverse = useIsInverse() || false;
   const vars = convertThemeToCssVariables(mergeThemes(theme, v3));
-  return (
-    <ThemeContext.Consumer>
-      {(theme: any) => <Global styles={getStyles(theme, isInverse, vars)} />}
-    </ThemeContext.Consumer>
-  );
+
+  return <Global styles={getStyles(isInverse, vars)} />;
 };

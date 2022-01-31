@@ -2,7 +2,8 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import {
   InverseContext,
-  useIsInverse
+  useIsInverse,
+  useThemeStyling,
 } from '@react-magma/themes';
 
 import {
@@ -91,15 +92,12 @@ export type AccordionProps =
   | AccordionSingleControlledProps;
 
 const StyledAccordion = styled.div<AccordionProps>`
-  background: ${props =>
-    props.isInverse
-      ? 'var(--colors-foundation)'
-      : 'var(--colors-neutral08)'};
-  border-bottom: 1px solid ${props => 'var(--colors-neutral06)'};
-  color: ${props =>
-    props.isInverse
-      ? 'var(--colors-neutral08)'
-      : 'var(--colors-neutral)'};
+  ${(props: AccordionProps) =>
+    useThemeStyling<AccordionProps>({
+      props,
+      style: props.style,
+      componentName: 'Accordion',
+    }) as any}
 `;
 
 export const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(

@@ -2,12 +2,13 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
 import { AlertProps } from '../Alert';
-import { AlertVariant, buildAlertBackground, VARIANT_ICON } from '../AlertBase';
+import { AlertVariant, VARIANT_ICON } from '../AlertBase';
 import { CloseIcon } from 'react-magma-icons';
 import { Button, ButtonSize, ButtonVariant, ButtonColor } from '../Button';
 import { IconButton } from '../IconButton';
 import { ThemeContext } from '../../theme/ThemeContext';
 import { I18nContext } from '../../i18n';
+import { useThemeStyling } from '@react-magma/themes';
 
 /**
  * @children required
@@ -29,41 +30,30 @@ export interface BannerProps extends AlertProps {
 }
 
 const StyledBanner = styled.div<AlertProps>`
-  align-items: stretch;
-  background: ${props => buildAlertBackground(props)};
-  color: ${props =>
-    props.variant === 'warning'
-      ? props.theme.colors.neutral
-      : props.theme.colors.neutral08};
-  display: flex;
-  font-size: ${props => props.theme.typeScale.size03.fontSize};
-  line-height: ${props => props.theme.typeScale.size03.lineHeight};
-  position: relative;
-  text-align: left;
-
-  @media (max-width: ${props => props.theme.breakpoints.small}px) {
-    text-align: left;
-    font-size: ${props => props.theme.typeScale.size02.fontSize};
-    line-height: ${props => props.theme.typeScale.size02.lineHeight};
-  }
+  ${(props: AlertProps) =>
+    useThemeStyling<AlertProps>({
+      props,
+      style: props.style,
+      componentName: 'Banner',
+    }) as any}
 `;
 
 const BannerContents = styled.div`
-  align-items: center;
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-start;
-  padding: ${props => props.theme.spaceScale.spacing04};
-
-  @media (max-width: ${props => props.theme.breakpoints.small}px) {
-    justify-content: flex-start;
-  }
+  ${() =>
+    useThemeStyling({
+      props: {},
+      style: {},
+      componentName: 'Banner.BannerContents',
+    }) as any}
 `;
 
 const ButtonWrapper = styled.span`
-  align-items: center;
-  display: flex;
-  flex-shrink: 0;
+  ${() =>
+    useThemeStyling({
+      props: {},
+      style: {},
+      componentName: 'Banner.ButtonWrapper',
+    }) as any}
 `;
 
 const allowedProps = ['icon', 'isInverse', 'theme', 'variant'];
@@ -75,48 +65,23 @@ const shouldForwardProp = prop => {
 const DismissButton = styled(IconButton, { shouldForwardProp })<{
   alertVariant?: AlertVariant;
 }>`
-  align-self: stretch;
-  border-radius: 0;
-  color: ${({ alertVariant, theme }) =>
-    alertVariant === 'warning' ? theme.colors.neutral : theme.colors.neutral08};
-  height: auto;
-  padding: 0 ${props => props.theme.spaceScale.spacing05};
-  width: auto;
-
-  &&:focus:not(:disabled) {
-    outline: 2px dotted
-      ${({ alertVariant, theme }) =>
-        alertVariant === 'warning'
-          ? theme.colors.neutral
-          : theme.colors.neutral08};
-    outline-offset: 0 !important;
-  }
-
-  &:hover,
-  &:focus {
-    :not(:disabled) {
-      &:before {
-        background: ${({ alertVariant, theme }) =>
-          alertVariant === 'warning'
-            ? theme.colors.neutral
-            : theme.colors.neutral08};
-        opacity: 0.15;
-      }
-
-      &:after {
-        display: none;
-      }
-    }
-  }
+  ${(props: { alertVariant?: AlertVariant }) =>
+    useThemeStyling<{
+      alertVariant?: AlertVariant;
+    }>({
+      props,
+      style: {},
+      componentName: 'Banner.DismissButton',
+    }) as any}
 `;
 
 const IconWrapper = styled.span`
-  display: inline-flex;
-  padding-right: ${props => props.theme.spaceScale.spacing03};
-
-  @media (max-width: ${props => props.theme.breakpoints.small}px) {
-    display: none;
-  }
+  ${() =>
+    useThemeStyling({
+      props: {},
+      style: {},
+      componentName: 'Banner.IconWrapper',
+    }) as any}
 `;
 
 function renderIcon(variant = 'info', theme: any) {

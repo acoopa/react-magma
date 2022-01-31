@@ -1,20 +1,30 @@
-// import { ThemeInterface } from '../ThemeInterface';
-import { v3 as magma } from '../magma';
-// import { ThemeInterface } from '../ThemeInterface';
+import { magmav3 as magma } from '../magma';
 
-export const mergeThemes = (obj1:any, obj2:any=magma) => {
-  const keys = Object.keys(obj2)
-  let nextObj = { ...obj1 }
+export const mergeThemes = (
+  overrideObject: Record<any, any> = {},
+  baseObject: Record<any, any> = magma
+) => {
+  const keys = Array.from(
+    new Set([...Object.keys(overrideObject), ...Object.keys(baseObject)])
+  );
 
-  for (let i = 0; i < keys.length; i += 1) {
-    const key = keys[i]
-    const value = obj2[key]
-    if (typeof value === "object" && value !== null) {
-      nextObj = { ...nextObj, ...mergeThemes(nextObj, value) }
+  let mergedObject = { ...overrideObject };
+
+  keys.forEach(key => {
+    const currentType = typeof overrideObject[key] || typeof baseObject[key];
+    const value =
+      currentType === 'object'
+        ? baseObject[key]
+        : overrideObject[key] || baseObject[key];
+    if (typeof value === 'object' && value !== null) {
+      mergedObject[key] = {
+        ...mergedObject[key],
+        ...mergeThemes(mergedObject[key], value),
+      };
     } else {
-      nextObj = { ...nextObj, [key]: value }
+      mergedObject = { ...mergedObject, [key]: value };
     }
-  }
+  });
 
-  return nextObj
-}
+  return mergedObject;
+};

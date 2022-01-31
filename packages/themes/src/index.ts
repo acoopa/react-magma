@@ -1,5 +1,5 @@
 export * from './GlobalStyles';
-export { magma, v3 } from './magma';
+export { magma, magmav3 } from './magma';
 export * from './magmaColors';
 export * from '@emotion/styled';
 export * from './ThemeContext';

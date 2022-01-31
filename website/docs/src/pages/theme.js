@@ -16,6 +16,11 @@ import {
   AccordionPanel,
   Alert,
   AlertVariant,
+  Badge,
+  BadgeColor,
+  Banner,
+  Breadcrumb,
+  BreadcrumbItem,
   Button,
   ButtonColor,
   ButtonIconPosition,
@@ -69,8 +74,7 @@ const Wrapper = styled.div`
   grid-template-rows: auto;
   gap: 40px 40px;
   grid-auto-flow: row;
-  grid-template-areas:
-    'zero zero zero zero zero zero';
+  grid-template-areas: 'zero zero zero zero zero zero';
   width: 100%;
 `;
 
@@ -115,16 +119,15 @@ const TypographyContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
   gap: 0px 0px;
-  grid-template-areas:
-    "typographyOne typographyTwo";
-`
+  grid-template-areas: 'typographyOne typographyTwo';
+`;
 
 const TypographyOne = styled.div`
   grid-area: typographyOne;
-`
+`;
 const TypographyTwo = styled.div`
   grid-area: typographyTwo;
-`
+`;
 
 const RadioContainer = styled.div`
   display: grid;
@@ -162,20 +165,20 @@ const FormContainer = styled.div`
   grid-template-rows: auto 1fr auto;
   gap: 10px 10px;
   grid-template-areas:
-    "formOne formOne"
-    "formTwo formThree"
-    "formFour formFour";
-`
+    'formOne formOne'
+    'formTwo formThree'
+    'formFour formFour';
+`;
 
 const FormThree = styled.div`
   grid-area: formThree;
-`
+`;
 const FormTwo = styled.div`
   grid-area: formTwo;
-`
+`;
 const FormOne = styled.div`
   grid-area: formOne;
-`
+`;
 const FormFour = styled.div`
   grid-area: formFour;
   margin-top: var(--spaceScale-spacing08);
@@ -211,7 +214,10 @@ const thema = (theme, path = '') =>
 
 export function Example() {
   const [showDrawer, setShowDrawer] = React.useState(false);
-  const [theme, setTheme] = useLocalStorage({key: 'theme', defaultValue: JSON.stringify(v3)});
+  const [theme, setTheme] = useLocalStorage({
+    key: 'theme',
+    defaultValue: JSON.stringify(v3),
+  });
   const [activeIndex, setActiveIndex] = React.useState(0);
 
   function handleChange(index) {
@@ -430,6 +436,7 @@ export function Example() {
                     </Paragraph>
                   </CardBody>
                   <img
+                    alt="kitty"
                     height="125"
                     width="250"
                     src="https://placekitten.com/250/125"
@@ -456,6 +463,53 @@ export function Example() {
                 <Alert isDismissible variant={AlertVariant.danger}>
                   Clear and concise message goes here.
                 </Alert>
+                <hr />
+                <Banner>Default (info) banner</Banner>
+                <Banner variant={AlertVariant.success}>Success banner</Banner>
+                <Banner variant={AlertVariant.warning}>Warning banner</Banner>
+                <Banner variant={AlertVariant.danger}>
+                  Danger banner. Lorem ipsum dolor sit amet, consectetur
+                  adipiscing elit. Vivamus rutrum nisl placerat ullamcorper.
+                  Maecenas gravida ut velit sagittis lacinia.
+                </Banner>
+                <Banner isDismissible variant={AlertVariant.success}>
+                  Success! You may now dismiss this banner
+                </Banner>
+                <Banner
+                  actionButtonText="Action"
+                  actionButtonOnClick={() => {}}
+                >
+                  Default banner
+                </Banner>
+                <hr />
+                <Badge color={BadgeColor.primary}>Primary</Badge>
+                <Badge color={BadgeColor.secondary}>Secondary</Badge>
+                <Badge color={BadgeColor.light}>Light</Badge>
+                <Badge color={BadgeColor.danger}>Danger</Badge>
+                <Badge color={BadgeColor.success}>Success</Badge>
+                <hr />
+                <Badge color={BadgeColor.primary} onClick={() => {}}>
+                  Primary
+                </Badge>
+                <Badge color={BadgeColor.secondary} onClick={() => {}}>
+                  Secondary
+                </Badge>
+                <Badge color={BadgeColor.light} onClick={() => {}}>
+                  Light
+                </Badge>
+                <Badge color={BadgeColor.danger} onClick={() => {}}>
+                  Danger
+                </Badge>
+                <Badge color={BadgeColor.success} onClick={() => {}}>
+                  Success
+                </Badge>
+                <hr />
+                <Breadcrumb>
+                  <BreadcrumbItem to="#">Home</BreadcrumbItem>
+                  <BreadcrumbItem to="#">Library</BreadcrumbItem>
+                  <BreadcrumbItem>Data</BreadcrumbItem>
+                </Breadcrumb>
+                <hr />
                 <Accordion defaultIndex={[0]}>
                   <AccordionItem>
                     <h3>
@@ -618,7 +672,7 @@ export function Example() {
 
 const Theme = () => (
   <>
-    <Example/>
+    <Example />
   </>
 );
 

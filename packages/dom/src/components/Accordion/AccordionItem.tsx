@@ -5,29 +5,22 @@ import {
   useAccordionItem,
 } from './useAccordionItem';
 import styled from '@emotion/styled';
+import { useThemeStyling } from '@react-magma/themes';
 
 /**
  * @children required
  */
 export interface AccordionItemProps
   extends UseAccordionItemProps,
-    React.HTMLAttributes<HTMLDivElement> {
-}
+    React.HTMLAttributes<HTMLDivElement> {}
 
 const StyledItem = styled.div`
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    background: none;
-    color: inherit;
-    font: inherit;
-    line-height: inherit;
-    margin: 0;
-    padding: 0;
-  }
+  ${() =>
+    useThemeStyling({
+      props: {},
+      style: {},
+      componentName: 'Accordion.AccordionItem',
+    }) as any}
 `;
 
 export const AccordionItem = React.forwardRef<

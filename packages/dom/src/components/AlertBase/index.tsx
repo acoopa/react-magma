@@ -1,8 +1,11 @@
 import * as React from 'react';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import { InverseContext, useIsInverse } from '@react-magma/themes';
+import {
+  InverseContext,
+  useIsInverse,
+  useThemeStyling,
+} from '@react-magma/themes';
 
 import {
   InfoIcon,
@@ -34,7 +37,6 @@ export enum AlertVariant {
   warning = 'warning',
   danger = 'danger',
 }
-
 export interface AlertBaseProps extends React.HTMLAttributes<HTMLDivElement> {
   closeAriaLabel?: string;
   forceDismiss?: () => void;
@@ -51,8 +53,6 @@ export interface AlertBaseProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: AlertVariant;
 }
 
-export const transitionDuration = 500;
-
 export function buildAlertBackground(props) {
   switch (props.variant) {
     case 'success':
@@ -66,158 +66,7 @@ export function buildAlertBackground(props) {
   }
 }
 
-const StyledAlert = styled.div<AlertBaseProps>`
-  align-items: stretch;
-  animation: ${props =>
-    props.isExiting
-      ? `fadeout ${transitionDuration}ms`
-      : `fadein ${transitionDuration}ms`};
-
-  display: flex;
-  flex-direction: column;
-  font-size: var(--typeScale-size03-fontSize);
-  line-height: var(--typeScale-size03-lineHeight);
-  margin-bottom: var(--spaceScale-spacing06);
-  max-width: 100%;
-  padding: 0;
-  position: relative;
-
-  @media (max-width: var(--breakpoints-small)) {
-    font-size: var(--typeScale-size02-fontSize);
-    line-height: var(--typeScale-size02-lineHeight);
-  }
-
-  &:focus {
-    outline: 2px dotted ${props =>
-      props.isInverse
-        ? 'var(--colors-focusInverse)'
-        : 'var(--colors-focus)'};
-    }
-  }
-
-  ${props =>
-    props.isToast &&
-    css`
-      animation: ${props.isExiting
-        ? `slideout ${transitionDuration}ms`
-        : `slidein ${transitionDuration}ms`};
-      min-width: 375px;
-      margin: 0 auto;
-
-      @media (max-width: var(--breakpoints-small) {
-        min-width: 0;
-        width: 100%;
-      }
-    `}
-
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeout {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-
-  @keyframes slidein {
-    from {
-      left: -500px;
-    }
-    to {
-      left: 0;
-    }
-  }
-
-  @keyframes slideout {
-    from {
-      left: 0;
-    }
-    to {
-      left: -500px;
-    }
-  }
-
-  a {
-    color: inherit;
-    font-weight: 600;
-    text-decoration: underline;
-
-    &:focus {
-      outline: 2px dotted ${props =>
-        props.variant === 'warning'
-          ? 'var(--colors-focus)'
-          : 'var(--colors-focusInverse)'};
-      }
-    }
-  }
-`;
-
-const StyledAlertInner = styled.div<AlertBaseProps>`
-  background-color: ${props => buildAlertBackground(props)};
-  border-radius: var(--borderRadius);
-  color: ${props =>
-    props.isInverse
-      ? 'var(--colors-neutral08)'
-      : 'var(--colors-neutral)'};
-  display: flex;
-  position: relative;
-
-  ${props =>
-    props.isToast &&
-    css`
-      border: 1px solid var(--colors-neutral08);
-      box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.4);
-      height: var(--spaceScale-spacing11);
-    `}
-`;
-
-const AlertContents = styled.div`
-  align-self: center;
-  flex-grow: 1;
-  padding: var(--spaceScale-spacing04) 0;
-
-  @media (max-width: var(--breakpoints-small)) {
-    padding-left: var(--spaceScale-spacing04);
-  }
-`;
-
-const IconWrapperStyles = css`
-  align-items: center;
-  display: flex;
-  flex-shrink: 0;
-  margin-right: 1px;
-`;
-
-const IconWrapper = styled.span<{ isToast?: boolean }>`
-  ${IconWrapperStyles}
-  padding: 0 var(--spaceScale-spacing03) 0 var(--spaceScale-spacing04);
-
-  @media (max-width: var(--breakpoints-small)) {
-    display: none;
-  }
-`;
-
-const ProgressRingWrapper = styled.div`
-  opacity: 0.7;
-  margin-top: var(--spaceScale-spacing01);
-  position: absolute;
-  top: var(--spaceScale-spacing02);
-  right: var(--spaceScale-spacing02);
-`;
-
-const DismissibleIconWrapper = styled.span<AlertBaseProps>`
-  ${IconWrapperStyles}
-`;
+export const transitionDuration = 500;
 
 const whitelistProps = ['icon', 'isInverse', 'variant'];
 
@@ -225,39 +74,75 @@ const shouldForwardProp = prop => {
   return isPropValid(prop) || whitelistProps.includes(prop);
 };
 
+const StyledAlert = styled.div<AlertBaseProps>`
+  ${(props: AlertBaseProps) =>
+    useThemeStyling<AlertBaseProps>({
+      props,
+      style: props.style,
+      componentName: 'Alert',
+    }) as any}
+`;
+
+const StyledAlertInner = styled.div<AlertBaseProps>`
+  ${(props: AlertBaseProps) =>
+    useThemeStyling<AlertBaseProps>({
+      props,
+      style: props.style,
+      componentName: 'Alert.AlertInner',
+    }) as any}
+`;
+
+const AlertContents = styled.div`
+  ${(props: AlertBaseProps) =>
+    useThemeStyling<AlertBaseProps>({
+      props,
+      style: props.style,
+      componentName: 'Alert.AlertContents',
+    }) as any}
+`;
+
+const IconWrapper = styled.span<{ isToast?: boolean }>`
+  ${() =>
+    useThemeStyling({
+      props: {},
+      style: {},
+      componentName: 'Alert.IconWrapperStyles',
+    }) as any}
+  ${(props: { isToast?: boolean }) =>
+    useThemeStyling<{ isToast?: boolean }>({
+      props,
+      style: {},
+      componentName: 'Alert.IconWrapper',
+    }) as any}
+`;
+
+const ProgressRingWrapper = styled.div`
+  ${() =>
+    useThemeStyling({
+      props: {},
+      style: {},
+      componentName: 'Alert.ProgressRingWrapper',
+    }) as any}
+`;
+
+const DismissibleIconWrapper = styled.span<AlertBaseProps>`
+  ${() =>
+    useThemeStyling({
+      props: {},
+      style: {},
+      componentName: 'Alert.IconWrapperStyles',
+    }) as any}
+`;
+
 const DismissButton = styled(IconButton, { shouldForwardProp })<{
   alertVariant?: AlertVariant;
 }>`
-  align-self: stretch;
-  border-radius: 0 var(--borderRadius)} var(--borderRadius) 0;
-  color: inherit;
-  height: auto;
-  padding: 0 var(--spaceScale-spacing04);
-  width: auto;
-
-  &&:focus:not(:disabled) {
-    outline: 2px dotted
-      ${({ alertVariant }) =>
-        alertVariant === 'warning'
-          ? 'var(--colors-focus)'
-          : 'var(--colors-focusInverse)'};
-    outline-offset: 0 !important;
-  }
-
-  &:hover,
-  &:focus {
-    :not(:disabled):before {
-      background: ${({ alertVariant }) =>
-        alertVariant === 'warning'
-          ? 'var(--colors-focus)'
-          : 'var(--colors-focusInverse)'};
-      opacity: 0.15;
-    }
-
-    &:after {
-      display: none;
-    }
-  }
+  ${(props: { alertVariant?: AlertVariant }) =>
+    useThemeStyling<{ alertVariant?: AlertVariant }>({
+      props,
+      style: {},
+      componentName: 'Alert.DismissButton',
+    }) as any}
 `;
 
 function renderIcon(variant = 'info', isToast?: boolean) {
@@ -360,15 +245,7 @@ export const AlertBase = React.forwardRef<HTMLDivElement, AlertBaseProps>(
                       ? closeAriaLabel
                       : i18n.alert.dismissAriaLabel
                   }
-                  icon={
-                    <CloseIcon
-                      size={
-                        hasTimerRing
-                          ? 16
-                          : 20
-                      }
-                    />
-                  }
+                  icon={<CloseIcon size={hasTimerRing ? 16 : 20} />}
                   isInverse
                   onClick={forceDismiss || handleDismiss}
                   variant={ButtonVariant.link}

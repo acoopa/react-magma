@@ -16,36 +16,54 @@ export const AppBar = {
   },
   props: {
     isCompact: {
-      height: 'var(--spacing-11)',
-      padding:
-        'var(--spacing-05) var(--spacing-05) var(--spacing-05) var(--spacing-06)',
+      default: {
+        height: 'var(--spacing-11)',
+        padding:
+          'var(--spacing-05) var(--spacing-05) var(--spacing-05) var(--spacing-06)',
+      },
     },
     isInverse: {
-      background: 'var(--colors-foundation02)',
-      borderBottom: '1px solid var(--colors-foundation)',
-      color: 'var(--colors-neutral08)',
+      default: {
+        background: 'var(--colors-foundation02)',
+        borderBottom: '1px solid var(--colors-foundation)',
+        color: 'var(--colors-neutral08)',
+      },
     },
     sticky: {
-      boxShadow: '0 2px 3px 0 rgb(0 0 0 / 37%)',
+      default: {
+        boxShadow: '0 2px 3px 0 rgb(0 0 0 / 37%)',
+      },
     },
     fixed: {
-      boxShadow: '0 2px 3px 0 rgb(0 0 0 / 37%)',
+      default: {
+        boxShadow: '0 2px 3px 0 rgb(0 0 0 / 37%)',
+      },
     },
     position: {
       absolute: {
-        position: 'absolute',
+        default: {
+          position: 'absolute',
+        },
       },
       fixed: {
-        position: 'fixed',
+        default: {
+          position: 'fixed',
+        },
       },
       relative: {
-        position: 'relative',
+        default: {
+          position: 'relative',
+        },
       },
       static: {
-        position: 'static',
+        default: {
+          position: 'static',
+        },
       },
       sticky: {
-        position: 'sticky',
+        default: {
+          position: 'sticky',
+        },
       },
     },
   },

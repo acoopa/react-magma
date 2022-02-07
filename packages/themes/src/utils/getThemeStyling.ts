@@ -95,7 +95,9 @@ export const getThemeStyling = <ComponentInterface>(
       Object.keys(style.props || {}).reduce<CSSProperties>(
         (acc: CSSProperties, key: string): CSSProperties => {
           const value =
-            typeof props[key as keyof ComponentInterface] === 'boolean'
+            props[key as keyof ComponentInterface] === undefined
+              ? {}
+              : typeof props[key as keyof ComponentInterface] === 'boolean'
               ? getBooleanValue(props, key as keyof ComponentInterface, style)
               : getObjectValue(props, key as keyof ComponentInterface, style);
 

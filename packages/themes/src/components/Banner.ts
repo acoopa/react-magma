@@ -1,6 +1,49 @@
 import { breakpoints } from '../breakpoints';
 
 export const Banner = {
+  default: {
+    alignItems: 'stretch',
+    backgroundColor: 'var(--colors-neutral)',
+    color: 'var(--colors-neutral08)',
+    display: 'flex',
+    fontSize: 'var(--typeScale-size03-fontSize)',
+    lineHeight: 'var(--typeScale-size03-lineHeight)',
+    position: 'relative',
+    textAlign: 'left',
+
+    [`@media (max-width: ${breakpoints.small})`]: {
+      textAlign: 'left',
+      fontSize: 'var(--typeScale-size02-fontSize)',
+      lineHeight: 'var(--typeScale-size02-lineHeight)',
+    },
+  },
+  props: {
+    variant: {
+      info: {
+        default: {
+          backgroundColor: 'var(--colors-neutral)',
+        },
+      },
+      danger: {
+        default: {
+          color: 'var(--colors-neutral08)',
+          backgroundColor: 'var(--colors-danger-default)',
+        },
+      },
+      success: {
+        default: {
+          color: 'var(--colors-neutral08)',
+          backgroundColor: 'var(--colors-success-default)',
+        },
+      },
+      warning: {
+        default: {
+          color: 'var(--colors-neutral)',
+          backgroundColor: 'var(--colors-pop04)',
+        },
+      },
+    },
+  },
   components: {
     BannerContents: {
       default: {
@@ -63,22 +106,24 @@ export const Banner = {
       props: {
         alertVariant: {
           warning: {
-            '&&:focus:not(:disabled)': {
-              outline: '2px dotted var(--colors-neutral)',
-            },
+            default: {
+              '&&:focus:not(:disabled)': {
+                outline: '2px dotted var(--colors-neutral)',
+              },
 
-            '&:hover': {
-              ':not(:disabled)': {
-                '&:before': {
-                  background: 'var(--colors-neutral)',
+              '&:hover': {
+                ':not(:disabled)': {
+                  '&:before': {
+                    background: 'var(--colors-neutral)',
+                  },
                 },
               },
-            },
 
-            '&:focus': {
-              ':not(:disabled)': {
-                '&:before': {
-                  background: 'var(--colors-neutral)',
+              '&:focus': {
+                ':not(:disabled)': {
+                  '&:before': {
+                    background: 'var(--colors-neutral)',
+                  },
                 },
               },
             },
@@ -94,41 +139,6 @@ export const Banner = {
         [`@media (max-width: ${breakpoints.small})`]: {
           display: 'none',
         },
-      },
-    },
-  },
-  default: {
-    alignItems: 'stretch',
-    backgroundColor: 'var(--colors-neutral)',
-    color: 'var(--colors-neutral08)',
-    display: 'flex',
-    fontSize: 'var(--typeScale-size03-fontSize)',
-    lineHeight: 'var(--typeScale-size03-lineHeight)',
-    position: 'relative',
-    textAlign: 'left',
-
-    [`@media (max-width: ${breakpoints.small})`]: {
-      textAlign: 'left',
-      fontSize: 'var(--typeScale-size02-fontSize)',
-      lineHeight: 'var(--typeScale-size02-lineHeight)',
-    },
-  },
-  props: {
-    variant: {
-      info: {
-        backgroundColor: 'var(--colors-neutral)',
-      },
-      danger: {
-        color: 'var(--colors-neutral08)',
-        backgroundColor: 'var(--colors-danger-default)',
-      },
-      success: {
-        color: 'var(--colors-neutral08)',
-        backgroundColor: 'var(--colors-success-default)',
-      },
-      warning: {
-        color: 'var(--colors-neutral)',
-        backgroundColor: 'var(--colors-pop04)',
       },
     },
   },

@@ -6,8 +6,10 @@ export const Accordion = {
   },
   props: {
     isInverse: {
-      background: 'var(--colors-foundation)',
-      color: 'var(--colors-neutral08)',
+      default: {
+        background: 'var(--colors-foundation)',
+        color: 'var(--colors-neutral08)',
+      },
     },
   },
   components: {
@@ -38,16 +40,18 @@ export const Accordion = {
       },
       props: {
         isInverse: {
-          background: 'var(--colors-foundation)',
-          borderTop: '1px solid var(--colors-tint04)',
-          color: 'var(--colors-neutral08)',
+          default: {
+            background: 'var(--colors-foundation)',
+            borderTop: '1px solid var(--colors-tint04)',
+            color: 'var(--colors-neutral08)',
 
-          '&:focus': {
-            outline: '2px dotted var(--colors-focusInverse)',
-          },
+            '&:focus': {
+              outline: '2px dotted var(--colors-focusInverse)',
+            },
 
-          '&&[disabled]': {
-            color: 'var(--colors-disabledInverseText)',
+            '&&[disabled]': {
+              color: 'var(--colors-disabledInverseText)',
+            },
           },
         },
       },
@@ -112,8 +116,10 @@ export const Accordion = {
       },
       props: {
         isInverse: {
-          background: 'var(--colors-foundation)',
-          color: 'var(--colors-neutral08)',
+          default: {
+            background: 'var(--colors-foundation)',
+            color: 'var(--colors-neutral08)',
+          },
         },
       },
     },

@@ -39,18 +39,22 @@ export const Alert = {
   },
   props: {
     isInverse: {
-      '&:focus': {
-        outline: '2px dotted var(--colors-focusInverse)',
+      default: {
+        '&:focus': {
+          outline: '2px dotted var(--colors-focusInverse)',
+        },
       },
     },
     isToast: {
-      animation: 'placeholder and keyframes',
-      minWidth: '375px',
-      margin: '0 auto',
+      default: {
+        animation: 'placeholder and keyframes',
+        minWidth: '375px',
+        margin: '0 auto',
 
-      [`@media (max-width: ${breakpoints.small})`]: {
-        minWidth: 0,
-        width: '100%',
+        [`@media (max-width: ${breakpoints.small})`]: {
+          minWidth: 0,
+          width: '100%',
+        },
       },
     },
   },
@@ -82,28 +86,40 @@ export const Alert = {
       props: {
         variant: {
           info: {
-            backgroundColor: 'var(--colors-neutral)',
+            default: {
+              backgroundColor: 'var(--colors-neutral)',
+            },
           },
           danger: {
-            color: 'var(--colors-neutral08)',
-            backgroundColor: 'var(--colors-danger-default)',
+            default: {
+              color: 'var(--colors-neutral08)',
+              backgroundColor: 'var(--colors-danger-default)',
+            },
           },
           success: {
-            color: 'var(--colors-neutral08)',
-            backgroundColor: 'var(--colors-success-default)',
+            default: {
+              color: 'var(--colors-neutral08)',
+              backgroundColor: 'var(--colors-success-default)',
+            },
           },
           warning: {
-            color: 'var(--colors-neutral)',
-            backgroundColor: 'var(--colors-pop04)',
+            default: {
+              color: 'var(--colors-neutral)',
+              backgroundColor: 'var(--colors-pop04)',
+            },
           },
         },
         isInverse: {
-          color: 'var(--colors-neutral08)',
+          default: {
+            color: 'var(--colors-neutral08)',
+          },
         },
         isToast: {
-          animation: 'placeholder and keyframes',
-          minWidth: '375px',
-          margin: '0 auto',
+          default: {
+            animation: 'placeholder and keyframes',
+            minWidth: '375px',
+            margin: '0 auto',
+          },
         },
       },
     },
@@ -139,9 +155,11 @@ export const Alert = {
 
       props: {
         warning: {
-          background: 'var(--colors-focusInverse)',
-          '&&:focus:not(:disabled)': {
-            outline: '2px dotted var(--colors-focusInverse)',
+          default: {
+            background: 'var(--colors-focusInverse)',
+            '&&:focus:not(:disabled)': {
+              outline: '2px dotted var(--colors-focusInverse)',
+            },
           },
         },
       },

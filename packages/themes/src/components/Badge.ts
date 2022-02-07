@@ -1,85 +1,4 @@
 export const Badge = {
-  components: {
-    BadgeButton: {
-      default: {
-        cursor: 'pointer',
-        transition: 'background 0.35s',
-
-        '&:hover': {
-          background: 'var(--colors-neutral02-dark)',
-        },
-      },
-      props: {
-        color: {
-          danger: {
-            '&:hover': {
-              background: 'var(--colors-danger-dark)',
-            },
-
-            '&:focus': {
-              background: 'var(--colors-danger-dark)',
-            },
-
-            '&:active': {
-              background: 'var(--colors-danger-darker)',
-            },
-          },
-          light: {
-            '&:hover': {
-              background: 'var(--colors-neutral07-light)',
-            },
-
-            '&:focus': {
-              background: 'var(--colors-neutral07-light)',
-            },
-
-            '&:active': {
-              background: 'var(--colors-neutral07-lighter)',
-            },
-          },
-          primary: {
-            '&:hover': {
-              background: 'var(--colors-primary-dark)',
-            },
-
-            '&:focus': {
-              background: 'var(--colors-primary-dark)',
-            },
-
-            '&:active': {
-              background: 'var(--colors-primary-darker)',
-            },
-          },
-          secondary: {
-            '&:hover': {
-              background: 'var(--colors-neutral02-dark)',
-            },
-
-            '&:focus': {
-              background: 'var(--colors-neutral02-dark)',
-            },
-
-            '&:active': {
-              background: 'var(--colors-neutral02-darker)',
-            },
-          },
-          success: {
-            '&:hover': {
-              background: 'var(--colors-success-dark)',
-            },
-
-            '&:focus': {
-              background: 'var(--colors-success-dark)',
-            },
-
-            '&:active': {
-              background: 'var(--colors-success-darker)',
-            },
-          },
-        },
-      },
-    },
-  },
   default: {
     background: 'var(--colors-neutral02-default)',
     border: '1px solid',
@@ -108,21 +27,122 @@ export const Badge = {
     },
     color: {
       danger: {
-        background: 'var(--colors-danger-default)',
+        default: {
+          background: 'var(--colors-danger-default)',
+        },
       },
       light: {
-        background: 'var(--colors-neutral07-default)',
-        borderColor: 'var(--colors-neutral06)',
-        color: 'var(--colors-neutral)',
+        default: {
+          background: 'var(--colors-neutral07-default)',
+          borderColor: 'var(--colors-neutral06)',
+          color: 'var(--colors-neutral)',
+        },
       },
       primary: {
-        background: 'var(--colors-primary-default)',
+        default: {
+          background: 'var(--colors-primary-default)',
+        },
       },
       secondary: {
-        background: 'var(--colors-neutral02-default)',
+        default: {
+          background: 'var(--colors-neutral02-default)',
+        },
       },
       success: {
-        background: 'var(--colors-success-default)',
+        default: {
+          background: 'var(--colors-success-default)',
+        },
+      },
+    },
+  },
+  components: {
+    BadgeButton: {
+      default: {
+        cursor: 'pointer',
+        transition: 'background 0.35s',
+
+        '&:hover': {
+          background: 'var(--colors-neutral02-dark)',
+        },
+      },
+      props: {
+        color: {
+          danger: {
+            default: {
+              '&:hover': {
+                background: 'var(--colors-danger-dark)',
+              },
+
+              '&:focus': {
+                background: 'var(--colors-danger-dark)',
+              },
+
+              '&:active': {
+                background: 'var(--colors-danger-darker)',
+              },
+            },
+          },
+          light: {
+            default: {
+              '&:hover': {
+                background: 'var(--colors-neutral07-light)',
+              },
+
+              '&:focus': {
+                background: 'var(--colors-neutral07-light)',
+              },
+
+              '&:active': {
+                background: 'var(--colors-neutral07-lighter)',
+              },
+            },
+          },
+          primary: {
+            default: {
+              '&:hover': {
+                background: 'var(--colors-primary-dark)',
+              },
+
+              '&:focus': {
+                background: 'var(--colors-primary-dark)',
+              },
+
+              '&:active': {
+                background: 'var(--colors-primary-darker)',
+              },
+            },
+          },
+          secondary: {
+            default: {
+              '&:hover': {
+                background: 'var(--colors-neutral02-dark)',
+              },
+
+              '&:focus': {
+                background: 'var(--colors-neutral02-dark)',
+              },
+
+              '&:active': {
+                background: 'var(--colors-neutral02-darker)',
+              },
+            },
+          },
+          success: {
+            default: {
+              '&:hover': {
+                background: 'var(--colors-success-dark)',
+              },
+
+              '&:focus': {
+                background: 'var(--colors-success-dark)',
+              },
+
+              '&:active': {
+                background: 'var(--colors-success-darker)',
+              },
+            },
+          },
+        },
       },
     },
   },

@@ -18,7 +18,9 @@ export const Breadcrumb = {
       },
       props: {
         isInverse: {
-          color: 'var(--colors-neutral08)',
+          default: {
+            color: 'var(--colors-neutral08)',
+          },
         },
       },
     },

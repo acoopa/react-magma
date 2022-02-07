@@ -27,7 +27,9 @@ import {
   ButtonSize,
   ButtonVariant,
   Card,
+  CardAlignment,
   CardBody,
+  CardCalloutType,
   CardHeading,
   Checkbox,
   DatePicker,
@@ -428,7 +430,55 @@ export function Example() {
                 </div>
               </Three>
               <Four>
-                <Card width="250px">
+                <Card hasDropShadow>
+                  <CardBody>Some content</CardBody>
+                </Card>
+                <br />
+                <Card>
+                  <CardBody>
+                    <CardHeading headingLevel={5}>
+                      Card Heading Level 5
+                    </CardHeading>
+                    Some content
+                  </CardBody>
+                </Card>
+                <br />
+                <Card align={CardAlignment.right}>
+                  <CardBody>
+                    <CardHeading>Card Heading Right</CardHeading>
+                    Some content
+                  </CardBody>
+                </Card>
+                <br />
+                <Card calloutType={CardCalloutType.success}>
+                  <CardBody>
+                    <CardHeading>Card Heading</CardHeading>
+                    Some content
+                  </CardBody>
+                </Card>
+                <br />
+                <Card isInverse calloutType={CardCalloutType.danger}>
+                  <CardBody>
+                    <CardHeading>Card Heading</CardHeading>
+                    Some content
+                  </CardBody>
+                </Card>
+                <br />
+                <Card calloutType={CardCalloutType.warning}>
+                  <CardBody>
+                    <CardHeading>Card Heading</CardHeading>
+                    Some content
+                  </CardBody>
+                </Card>
+                <br />
+                <Card calloutType={CardCalloutType.primary}>
+                  <CardBody>
+                    <CardHeading>Card Heading</CardHeading>
+                    Some content
+                  </CardBody>
+                </Card>
+                <br />
+                <Card style={{ width: '250px' }}>
                   <CardBody>
                     <CardHeading>Card Title</CardHeading>
                     <Paragraph color={TypographyColor.subdued}>

@@ -14,7 +14,7 @@ export const mergeThemes = (
     const currentType = typeof overrideObject[key] || typeof baseObject[key];
     const value =
       currentType === 'object'
-        ? baseObject[key]
+        ? { ...baseObject[key], ...overrideObject[key] }
         : overrideObject[key] || baseObject[key];
     if (typeof value === 'object' && value !== null) {
       mergedObject[key] = {

@@ -10,20 +10,21 @@ export interface GetThemeStylingInterface<ComponentInterface> {
 
 const getComponentStyle = (
   theme: Record<any, any>,
-  componentName: string
+  componentName?: string
 ): CSSProperties =>
-  componentName.split('.').reduce((subTheme, componentName) => {
-    const { extendsComponent, ...componentTheme } =
-      subTheme.components[componentName];
+  componentName
+    ? componentName.split('.').reduce((subTheme, componentName) => {
+        const { extendsComponent, ...componentTheme } =
+          subTheme.components[componentName];
 
-    if (extendsComponent) {
-      console.log(componentTheme);
-    }
-
-    return extendsComponent
-      ? mergeThemes(componentTheme, getComponentStyle(theme, extendsComponent))
-      : componentTheme;
-  }, theme);
+        return extendsComponent
+          ? mergeThemes(
+              componentTheme,
+              getComponentStyle(theme, extendsComponent)
+            )
+          : componentTheme;
+      }, theme)
+    : {};
 
 export const getThemeStyling = <ComponentInterface>(
   attributes: GetThemeStylingInterface<ComponentInterface>
@@ -36,61 +37,74 @@ export const getThemeStyling = <ComponentInterface>(
     componentName,
   } = attributes;
 
-  let style: { [x: string]: any } = {};
   const theme = mergeThemes(themeOverride);
-
-  if (componentName) {
-    style = mergeThemes(styleOverride, getComponentStyle(theme, componentName));
-  }
+  const style: { [x: string]: any } = mergeThemes(
+    styleOverride,
+    getComponentStyle(theme, componentName)
+  );
 
   const getBooleanValue = (
     props: ComponentInterface,
     key: keyof ComponentInterface,
     style: { [x: string]: any }
-  ) => props && props[key] && style && style.props && style.props[key];
+  ) => {
+    if (!(props && props[key])) return {};
+    if (!(style && style.props && style.props[key])) return {};
+
+    if (style.props[key].default) {
+      return getThemeStyling({
+        props,
+        componentStyle: style.props[key],
+      });
+    }
+
+    return style.props[key];
+  };
 
   const getObjectValue = (
     props: ComponentInterface,
     key: keyof ComponentInterface,
     style: { [x: string]: any }
   ) => {
-    if (!(props && props[key])) return {};
-    if (
-      !(
-        style &&
-        style.props &&
-        style.props[key] &&
-        style.props[key][props[key]]
-      )
-    )
-      return {};
+    const propKey = props[key] || 'default';
 
-    if (style.props[key][props[key]].default) {
+    if (!(style && style.props && style.props[key])) return {};
+
+    if (style.props[key][propKey]?.default) {
       return getThemeStyling({
         props,
-        componentStyle: style.props[key][props[key]],
+        componentStyle: mergeThemes(
+          {
+            default: mergeThemes(
+              style.props[key][propKey].default,
+              style.props[key]._base || {}
+            ),
+          },
+          style.props[key][propKey]
+        ),
+        componentName: '',
       });
     }
 
-    return style.props[key][props[key]];
+    return mergeThemes(style.props[key][propKey], style.props[key]._base || {});
   };
 
-  return {
-    ...cssStyles,
-    ...(props &&
+  return mergeThemes(
+    props &&
       style &&
-      Object.keys(props).reduce<CSSProperties>(
+      Object.keys(style.props || {}).reduce<CSSProperties>(
         (acc: CSSProperties, key: string): CSSProperties => {
           const value =
             typeof props[key as keyof ComponentInterface] === 'boolean'
               ? getBooleanValue(props, key as keyof ComponentInterface, style)
               : getObjectValue(props, key as keyof ComponentInterface, style);
 
-          return { ...acc, ...value };
+          return mergeThemes(value, acc);
         },
         style.default || {}
-      )),
-  };
+      ),
+    cssStyles
+  );
 };
 
 export const useThemeStyling = <ComponentInterface>(

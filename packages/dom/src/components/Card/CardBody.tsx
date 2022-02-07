@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from '@emotion/styled';
 import { CardProps } from '../Card';
 import { ThemeContext } from '../../theme/ThemeContext';
+import { useThemeStyling } from '@react-magma/themes';
 
 /**
  * @children required
@@ -12,12 +13,12 @@ export interface CardBodyProps
 }
 
 const StyledCardBody = styled.div<CardProps>`
-  padding: var(--spaceScale-spacing05);
-  text-align: ${props => props.align};
-
-  @media (min-width: ${props => props.theme.breakpoints.small}px) {
-    padding: var(--spaceScale-spacing06);
-  }
+  ${(props: CardProps) =>
+    useThemeStyling<CardProps>({
+      props,
+      style: props.style,
+      componentName: 'Card.CardBody',
+    }) as any}
 `;
 
 export const CardBody = React.forwardRef<HTMLDivElement, CardBodyProps>(

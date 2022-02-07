@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { CardContext } from './Card';
 import { Heading } from '../Heading';
 import { TypographyColor, TypographyVisualStyle } from '../Typography';
+import { useThemeStyling } from '@react-magma/themes';
 
 /**
  * @children required
@@ -19,7 +20,12 @@ export interface CardHeadingProps
 }
 
 const StyledCardHeading = styled(Heading)`
-  margin-top: 0;
+  ${() =>
+    useThemeStyling({
+      props: {},
+      style: {},
+      componentName: 'Card.CardHeading',
+    }) as any}
 `;
 
 export const CardHeading = React.forwardRef<

@@ -14,6 +14,31 @@ export const Typography = {
         color: 'var(--colors-neutral03)',
       },
     },
+    ContextVariant: {
+      default: {
+        fontFamily: 'var(--bodyFont)',
+        fontWeight: 'normal',
+      },
+      expressive: {},
+      narrative: {},
+    },
+    ParagraphStyles: {
+      default: {},
+      large: {},
+      props: {},
+    },
+    VisualStyle: {
+      headingXLarge: {},
+      headingLarge: {},
+      headingMedium: {},
+      headingSmall: {},
+      headingXSmall: {},
+      heading2XSmall: {},
+      bodyLarge: {},
+      bodyMedium: {},
+      bodySmall: {},
+      bodyXSmall: {},
+    },
   },
   props: {
     isInverse: {

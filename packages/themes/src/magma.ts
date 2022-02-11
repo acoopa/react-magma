@@ -28,6 +28,7 @@ import { Spinner } from './components/Spinner';
 import { Button } from './components/Button';
 import { Table } from './components/Table';
 import { Tabs } from './components/Tabs';
+import { Typography } from './components/Typography';
 
 export interface Colors {
   primary: string;
@@ -865,5 +866,6 @@ export const magmav3 = {
     Spinner,
     Table,
     Tabs,
+    Typography,
   },
 };
